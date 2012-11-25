@@ -38,7 +38,7 @@ coffee.server is the server component that communicates between the arduino and
 exposes a REST API for making coffee and steamed milk.
 
 
-### coffee.frontend
+## coffee.frontend
 
 A refernce frontend for coffee.server, coffee.frontend is meant to be run at
 http://coffee and provides a full featured html frontend for the coffee server.
