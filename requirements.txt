@@ -1,0 +1,6 @@
+# pip requirements
+
+django
+flask
+pyserial
+watchdog

@@ -1,0 +1,6 @@
+*.pyc
+*.log
+*.sqlite
+*.db
+
+coffee.arduino/build-cli
