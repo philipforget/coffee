@@ -1,6 +1,6 @@
 BOARD_TAG = atmega328
 ARDUINO_PORT = /dev/ttyUSB*
-ARDUINO_LIBS = LM75A
+ARDUINO_LIBS = LM75A Wire Wire/utility
 
 include /usr/share/arduino/Arduino.mk
 

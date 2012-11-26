@@ -42,6 +42,23 @@ This is because the makefile takes care of creating the imports in the .cpp
 file and doesn't seem to respect libraries installed in ~/sketchbook/libraries
 just yet. This works just fine for now.
 
+### LM75A
+coffee uses the LM75A I2C temperature sensor. It can be found cheaply online,
+does not require an external thermocouple or amplifier and works within the
+range of temperatures needed to make coffee and steam. It is a bit slow for
+conventional PID applications, but since our boiler will have lag time anyway
+from the fact that it is a big hunk of brass, this doesn't matter in practice.
+
+Addresses for the LM75A are determined by whether pins 5, 6 and 7 are tied high
+or low. The first four bits of the address are hardcoded into the chip as 1001.
+The three least significant bits represent the rest of the address. Tying a pin
+to Vs+ makes it 1, to ground makes it 0. In my setup it was easiest to tie them
+all to Vs+ since they are next to each other, which makes my address 1001111,
+or 79.
+
+A [good datasheet](http://www.ti.com/lit/ds/symlink/lm75a.pdf) for the LM75A is
+provided by Texas Instrument.
+
 
 ## coffee.server
 

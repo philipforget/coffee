@@ -6,7 +6,7 @@
 class LM75A {
   public:
     LM75A(int address);
-    float get_temp();
+    long get_temp();
   private:
     int _address;
 };

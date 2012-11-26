@@ -1,13 +1,16 @@
 #include <LM75A.h>
+#include <Wire.h>
 
 // Max serial speed between arduino and ipod touch
 # define SERIAL_SPEED 19200
 # define BCAST_INTERVAL 500
 
 long b_previous_m = 0;
-LM75A lm(100);
+LM75A lm(79);
 
 void setup(){
+  Wire.begin();
+
   Serial.begin(SERIAL_SPEED);
   Serial.println("Starting up");
 }
