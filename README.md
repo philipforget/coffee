@@ -31,6 +31,17 @@ The Makefile also provides an extra command that isn't in arduino-mk:
 make watch
 ```
 
+This is a bit of a hack but installing our libraries requires us to symlink
+directly into the arduino library folder for now since the makefile doesn't
+accept relative paths. For example:
+```
+cd /usr/share/arduino/libraries
+sudo ln -s <repo_root>/coffee.arduino/lib/* ./
+```
+This is because the makefile takes care of creating the imports in the .cpp
+file and doesn't seem to respect libraries installed in ~/sketchbook/libraries
+just yet. This works just fine for now.
+
 
 ## coffee.server
 
