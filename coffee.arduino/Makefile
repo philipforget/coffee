@@ -1,4 +1,5 @@
-BOARD_TAG = atmega328
+#BOARD_TAG = atmega328
+BOARD_TAG = diecimila
 ARDUINO_PORT = /dev/ttyUSB*
 ARDUINO_LIBS = LM75A Wire Wire/utility
 
