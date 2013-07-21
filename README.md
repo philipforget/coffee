@@ -32,6 +32,11 @@ brew tap larsimmisch/avr
 
 # Install avr-gcc etc.
 brew install avr-libc
+
+# Now we need to install Arduino-Makefile, change the initial cd to install it elsewhere
+cd ~/workspace/
+git clone git@github.com:sudar/Arduino-Makefile.git
+ln -s ~/workspace/Arduino-Makefile/bin/ard-reset-arduino ~/bin/
 ```
 
 The coffee.arduino makefile also provides a useful `make watch` entry which
