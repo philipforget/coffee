@@ -1,6 +1,6 @@
 # coffee
 
-RESTful Espresso. Coffee consists of three parts:
+RESTful Espresso. coffee consists of three parts:
 1. An arduino sketch which communicates with a python server.
 2. A python server which communicates with the arduino and provides a REST API.
 3. A frontend which consumes the API.
@@ -30,8 +30,8 @@ sudo perl -MCPAN -e 'install +Device::SerialPort'
 # Add the avr-gcc homebrew tap
 brew tap larsimmisch/avr
 
-# Install avr-gcc etc.
-brew install avr-libc
+# Install avr-gcc and avrdude
+brew install avr-libc avrdude
 
 # Now we need to install Arduino-Makefile, change the initial cd to install it elsewhere
 cd ~/workspace/
@@ -39,29 +39,7 @@ git clone git@github.com:sudar/Arduino-Makefile.git
 ln -s ~/workspace/Arduino-Makefile/bin/ard-reset-arduino ~/bin/
 ```
 
-The coffee.arduino makefile also provides a useful `make watch` entry which
-will automatically watch the .ino file for writes and build to the arduino
-board.
-
-```bash
-# Watches the .ino file and automatically builds when you write to the file
-make watch
-```
-
-This is a bit of a hack but installing our libraries requires us to symlink
-directly into the arduino library folder for now since the makefile doesn't
-accept relative paths. For example:
-
-```bash
-cd /usr/share/arduino/libraries
-sudo ln -s <repo_root>/coffee.arduino/lib/* ./
-```
-
-This is because the makefile takes care of creating the imports in the .cpp
-file and doesn't seem to respect libraries installed in ~/sketchbook/libraries
-just yet. This works just fine for now.
-
-### LM75A
+### LM75A Temperature Sensor
 coffee uses the LM75A I2C temperature sensor. It can be found cheaply online,
 does not require an external thermocouple or amplifier and works within the
 range of temperatures needed to make coffee and steam. It is a bit slow for

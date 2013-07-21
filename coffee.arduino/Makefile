@@ -7,7 +7,7 @@ USER_LIB_PATH = /Users/philipforget/workspace/coffee/coffee.arduino/lib
 # END OSX Specific
 
 BOARD_TAG = diecimila
-ARDUINO_PORT = /dev/ttyUSB*
+ARDUINO_PORT = /dev/tty.usbserial-A4001m75
 ARDUINO_LIBS = LM75A Wire Wire/utility SoftwareSerial
 
 include /Users/philipforget/workspace/Arduino-Makefile/arduino-mk/Arduino.mk
