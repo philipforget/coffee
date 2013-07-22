@@ -2,7 +2,7 @@ import serial
 import time
 
 TTY = '/dev/tty.usbserial-A4001m75'
-BAUD = 57600
+BAUD = 9600
 TIMEOUT = 1
 MAX_RETRIES = 5
 RETRY_SLEEP = 5
@@ -21,11 +21,10 @@ def loop(arduino):
     while line != "Starting up":
         print "Waiting for handshake"
         line = arduino.readline().strip()
-
     print "Got handshake"
     while True:
         print "> Sending good frame"
-        arduino.write('%123456#')
+        arduino.write('%1234567891#')
         while True:
             line = arduino.readline().strip()
             if line:

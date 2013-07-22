@@ -1,62 +1,74 @@
-char cmd0, cmd1, cmd2, cmd3, cmd4, cmd5, cmd6, cmd7;
-int past_available = 0;
+#define HEAD 0x02
+#define STOP 0x03
+byte i, val, code[6], checksum, bytesread, tempbyte;
 
-void setup(){
-  Serial.begin(57600);
+void setup() {
+  Serial.begin(9600); 
   Serial.println("Starting up");
 }
 
+void loop () {
+  i = 0;
+  checksum = 0;
+  bytesread = 0;
+  tempbyte = 0;
 
-void drain_serial(){
-    while(Serial.available())
-      if(Serial.read() == '#')
-        return;
-}
+  if (Serial.available()) {
+    // Check for header byte
+    val = Serial.read();
+    Serial.println(val);
+    if (val == 2) {
+      // read 10 digit code + 2 digit checksum
+      while (bytesread < 12) {
+        if (Serial.available()) { 
+          val = Serial.read();
+          // if header or stop bytes before the 10 digit reading 
 
-void process_message(){
-  // Process a fixed-frame message
-  cmd0 = Serial.read();
-  if(cmd0 != '%') {
-    Serial.println("Message frame did not start with %");
-    // Drain any remaining message parts
-    return drain_serial();
-  }
+          if((val == 0x0D)||(val == 0x0A)||(val == 0x03)||(val == 0x02)) { 
+            break;
+          }
 
-  cmd1 = Serial.read();
-  cmd2 = Serial.read();
-  cmd3 = Serial.read();
-  cmd4 = Serial.read();
-  cmd5 = Serial.read();
-  cmd6 = Serial.read();
-  cmd7 = Serial.read();
+          // Do Ascii/Hex conversion:
+          if ((val >= '0') && (val <= '9')) {
+            val = val - '0';
+          } else if ((val >= 'A') && (val <= 'F')) {
+            val = 10 + val - 'A';
+          }
 
-  if(cmd7 != '#'){
-    Serial.println("Invalid frame ending");
-    return drain_serial();
-  }
+          // Every two hex-digits, add byte to code:
+          if (bytesread & 1 == 1) {
+            // make some space for this hex-digit by
+            // shifting the previous hex-digit with 4 bits to the left:
+            code[bytesread >> 1] = (val | (tempbyte << 4));
 
-  Serial.println("Received Frame");
+            if (bytesread >> 1 != 5) {                // If we're at the checksum byte,
+              checksum ^= code[bytesread >> 1];       // Calculate the checksum... (XOR)
+            };
+          } else {
+            tempbyte = val;                           // Store the first hex digit first...
+          };
 
-  switch(cmd1){
-    // Set
-    case 'S':
-      switch(cmd2){
+          bytesread++;                                // ready to read next digit
+        } 
+      } 
 
+      // Output to Serial:
+      if (bytesread == 12) {
+        Serial.print("5-byte code: ");
+        for (i=0; i<5; i++) {
+          if (code[i] < 16) Serial.print("0");
+          Serial.print(code[i], HEX);
+          Serial.print(" ");
+        }
+        Serial.println();
+
+        Serial.print("Checksum: ");
+        Serial.print(code[5], HEX);
+        Serial.println(code[5] == checksum ? " -- passed." : " -- error.");
+        Serial.println();
       }
-    // Get
-    case 'G':
-      switch(cmd2){
-        case 'T':
-          return get_temperature();
-      }
-    default:
-      Serial.println("No match for message");
-  }
-}
 
-
-void loop(){
-  if(Serial.available() >= 8){
-    process_message();
+      bytesread = 0;
+    }
   }
 }
