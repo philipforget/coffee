@@ -4,3 +4,4 @@
 *.db
 
 coffee.arduino/build-*
+serial_trials.arduino/build-*
