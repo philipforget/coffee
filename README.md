@@ -16,7 +16,15 @@ You can either use the Arduino IDE to build the project or the Makefile which
 requires arduino-mk to be installed on your system. If you choose the latter,
 be sure to edit the makefile to target your board.
 
-### OS X Installation notes
+### Ubuntu Installation Notes
+
+It's pretty simple to get working on Ubuntu, but a few packages are needed.
+
+```bash
+sudo apt-get install arduino arduino-mk libdevice-serialport-perl
+```
+
+### OS X Installation Notes
 
 The arduino makefile is a bit of a pain to install on OS X. All these steps
 assume you have homebrew set up already. The steps are as follows:
