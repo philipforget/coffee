@@ -1,6 +1,7 @@
 # coffee
 
 RESTful Espresso. coffee consists of three parts:
+
 1. An arduino sketch which communicates with a python server.
 2. A python server which communicates with the arduino and provides a REST API.
 3. A frontend which consumes the API.

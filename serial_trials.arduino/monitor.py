@@ -1,9 +1,11 @@
 #!/usr/bin/env python
+import sys
 
 import serial
 
-def main():
-    s = serial.Serial('/dev/tty.usbserial-A4001m75', 9600, timeout=1)
+
+def main(port):
+    s = serial.Serial(port, 9600, timeout=1)
     while True:
         line = s.readline().strip()
         if line:
@@ -11,4 +13,4 @@ def main():
         
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])
