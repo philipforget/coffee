@@ -10,12 +10,14 @@
 
 # Ubuntu Specific
 include /usr/share/arduino/Arduino.mk
+PARSE_BOARD  = $(ARDUINO_DIR)/ard-parse-boards --boards_txt=$(BOARDS_TXT)
+ARDUINO_DIR  = /usr/share/arduino
+BOARD_TAG    = atmega328
+ARDUINO_PORT = /dev/ttyUSB0
 
 
 # Global
-BOARD_TAG = diecimila
-ARDUINO_PORT = /dev/ttyUSB0
-ARDUINO_LIBS = LM75A Wire Wire/utility SoftwareSerial
+#ARDUINO_LIBS = LM75A Wire Wire/utility SoftwareSerial
 
 
 monitor:
