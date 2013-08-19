@@ -99,3 +99,11 @@ with a voltage devider using two 1k ohm resistors.
 My testing cable looks like this
 ![testing cable](https://raw.github.com/philipforget/coffee/master/static/img/cable1.jpg)
 
+From left to right:
+* pin 27 - green - USB Data+
+* pin 25 - white - USB Data-
+* pin 23 - red   - +5v
+* pin 16 - black - USB Ground
+* -- serial --
+* pin 13 - green - Rx
+* pin 12 - white - Tx 3.3v
