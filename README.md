@@ -97,6 +97,7 @@ with a voltage devider using two 1k ohm resistors.
     Arduino Rx ------------------------------ iDevice Tx @ 3.3v (pin 12)
 
 My testing cable looks like this, labeled from left to right:
+
     * pin 27 - green - USB Data+
     * pin 25 - white - USB Data-
     * pin 23 - red   - +5v
