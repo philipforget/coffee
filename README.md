@@ -94,16 +94,15 @@ with a voltage devider using two 1k ohm resistors.
              |
     Arduino Tx @ 5v ---< 1k Ohm Resistor >--- iDevice Rx (pin 13)
     
-    Arduino Rx --- iDevice Tx @ 3.3v (pin 12)
+    Arduino Rx ------------------------------ iDevice Tx @ 3.3v (pin 12)
 
-My testing cable looks like this
+My testing cable looks like this, labeled from left to right:
+    * pin 27 - green - USB Data+
+    * pin 25 - white - USB Data-
+    * pin 23 - red   - +5v
+    * pin 16 - black - USB Ground
+    * -------------------------------
+    * pin 13 - green - Serial Rx
+    * pin 12 - white - Serial Tx 3.3v
+
 ![testing cable](https://raw.github.com/philipforget/coffee/master/static/img/cable1.jpg)
-
-From left to right:
-* pin 27 - green - USB Data+
-* pin 25 - white - USB Data-
-* pin 23 - red   - +5v
-* pin 16 - black - USB Ground
-* -- serial --
-* pin 13 - green - Rx
-* pin 12 - white - Tx 3.3v
