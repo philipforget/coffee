@@ -80,3 +80,22 @@ exposes a REST API for making coffee and steamed milk.
 
 A refernce frontend for coffee.server, coffee.frontend is meant to be run at
 http://coffee and provides a full featured html frontend for the coffee server.
+
+## iDevice Serial Cable
+
+A special serial cable needs to be constructed to communicate with the Arduino
+over serial. Since the Arduino I'm using outputs its signal at 5v, we need to
+step the voltage down from Arduino TX to iDevice RX. A simple way to do this is
+with a voltage devider using two 1k ohm resistors.
+
+    Ground ---
+             |
+      <1k Ohm Resistor>
+             |
+    Arduino Tx @ 5v ---< 1k Ohm Resistor >--- iDevice Rx (pin 13)
+    
+    Arduino Rx --- iDevice Tx @ 3.3v (pin 12)
+
+My testing cable looks like this
+![testing cable](https://raw.github.com/philipforget/coffee/master/static/img/cable1.jpg)
+
