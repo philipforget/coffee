@@ -1,27 +1,18 @@
-# OSX Specific
-#ARDUINO_DIR   = /Applications/Arduino.app/Contents/Resources/Java
-#ARDMK_DIR     = /Users/philipforget/workspace/Arduino-Makefile/
-#AVR_TOOLS_DIR = /usr/local/
-#PROJECT_DIR = /Users/philipforget/workspace/coffee/coffee.arduino
-#USER_LIB_PATH = /Users/philipforget/workspace/coffee/coffee.arduino/lib
+ifeq ($(shell uname -s),Linux)
+	ARDUINO_DIR   = /usr/share/arduino
+	AVR_TOOLS_DIR = /usr
 
-#include /Users/philipforget/workspace/Arduino-Makefile/arduino-mk/Arduino.mk
+	ARDUINO_PORT  = /dev/$(shell ls /dev | grep 'ttyUSB')
+	BOARD_TAG     = atmega328
+else
+	ARDUINO_DIR   = /Applications/Arduino.app/Contents/Resources/Java
+	AVR_TOOLS_DIR = /usr/local/
 
+	ARDUINO_PORT  = /dev/$(ls /dev | grep 'tty\.usbserial')
+	BOARD_TAG     = diecimila
+endif
 
-# Ubuntu Specific
-include /usr/share/arduino/Arduino.mk
-PARSE_BOARD  = $(ARDUINO_DIR)/ard-parse-boards --boards_txt=$(BOARDS_TXT)
-ARDUINO_DIR  = /usr/share/arduino
-BOARD_TAG    = atmega328
-ARDUINO_PORT = /dev/ttyUSB0
+ARDMK_DIR    = ~/workspace/Arduino-Makefile/
+ARDUINO_LIBS = SoftwareSerial
 
-
-# Global
-#ARDUINO_LIBS = LM75A Wire Wire/utility SoftwareSerial
-
-
-monitor:
-	python ./monitor.py "/dev/$$(ls /dev | grep -ie 'tty.\?usb')"
-
-watch:
-	watchmedo shell-command --patterns="*.ino" --command='make' .
+include ~/workspace/Arduino-Makefile/arduino-mk/Arduino.mk
