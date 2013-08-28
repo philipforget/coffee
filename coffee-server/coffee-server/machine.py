@@ -29,13 +29,13 @@ class NoResponse(Exception):
     pass
 
 
-class Coffee():
+class CoffeeMachine():
     """Exposes all of the functionality of the actual espresso hardware.
 
     """
     def __init__(self, board=None, baud=9600, timeout=1, connection_retries=5):
         self.connected = False
-        self.board = board or Coffee.find_board()
+        self.board = board or CoffeeMachine.find_board()
         self.baud = baud
         self.timeout = timeout
         self.connection_retries = connection_retries
